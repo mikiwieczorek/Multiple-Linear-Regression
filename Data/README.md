@@ -1,7 +1,9 @@
 # Predicting Selling Price of Homes In King County, WA
 
 The data for these sales comes from the official public records of home sales in the King County area, Washington State. 
-The data set contains 21,606 homes that sold between May 2014 and May 2015. The table below gives variable names and descriptions. The map below shows the location of all 21,606 homes you will be working with. 
+The data set contains 21,606 homes that sold between May 2014 and May 2015. The table below gives variable names and descriptions. The map below shows the location of all 21,606 homes you will be working with.
+
+The data and funcitons in mult.Rdata, Regression.Rdata are provided by Dr. Brant Deppa.
 
 ![](Homes_WA.png)
 
