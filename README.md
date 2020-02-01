@@ -1,5 +1,5 @@
-# Multiple-Linear-Regression
-
+# Multiple Linear Regression
+### Predicting Home Price
 ``` r
 #Load the .Rdata
 library(car)
@@ -8,8 +8,8 @@ library(car)
     ## Loading required package: carData
 
 ``` r
-load("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression/mult.Rdata")
-load("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression/Regression.Rdata")
+load("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression/Data/mult.Rdata")
+load("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression/Data/Regression.Rdata")
 ```
 
 Data
@@ -21,8 +21,10 @@ sales in the King County area, Washington State. The data set contains
 test data sets. The description of all variables is in the data section.
 
 ``` r
+setwd("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression/Data")
 KingTest = read.csv(file = "King County Homes (test).csv")
 King = read.csv("King County Homes (train).csv")
+setwd("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression")
 ```
 
 ``` r
@@ -183,134 +185,20 @@ Fit a full model:
 
 ``` r
 lm1.king = lm(price~., data = King_clean)
-summary(lm1.king)
+#summary(lm1.king)
 ```
-
-    ## 
-    ## Call:
-    ## lm(formula = price ~ ., data = King_clean)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -1124012   -70633     -466    62572  4418822 
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                 Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)   -2.459e+07  7.498e+06  -3.279 0.001043 ** 
-    ## bedrooms      -2.596e+04  1.765e+03 -14.706  < 2e-16 ***
-    ## bathrooms      2.022e+04  3.104e+03   6.515 7.47e-11 ***
-    ## sqft_living    1.311e+02  4.155e+00  31.541  < 2e-16 ***
-    ## sqft_lot       2.593e-01  4.358e-02   5.950 2.74e-09 ***
-    ## floors        -4.435e+04  3.692e+03 -12.012  < 2e-16 ***
-    ## waterfront1    5.987e+05  1.656e+04  36.143  < 2e-16 ***
-    ## view           5.906e+04  2.018e+03  29.266  < 2e-16 ***
-    ## condition      2.727e+04  2.266e+03  12.036  < 2e-16 ***
-    ## grade          5.648e+04  2.126e+03  26.567  < 2e-16 ***
-    ## sqft_above     8.105e+01  4.241e+00  19.109  < 2e-16 ***
-    ## sqft_basement         NA         NA      NA       NA    
-    ## yr_built      -6.508e+02  7.620e+01  -8.541  < 2e-16 ***
-    ## yr_renovated   2.677e+03  4.031e+02   6.641 3.21e-11 ***
-    ## renovated1    -5.306e+06  8.046e+05  -6.594 4.41e-11 ***
-    ## zipcode98002   3.763e+04  1.740e+04   2.163 0.030559 *  
-    ## zipcode98003  -2.297e+04  1.522e+04  -1.509 0.131336    
-    ## zipcode98004   7.296e+05  2.761e+04  26.423  < 2e-16 ***
-    ## zipcode98005   2.561e+05  2.959e+04   8.655  < 2e-16 ***
-    ## zipcode98006   2.304e+05  2.433e+04   9.471  < 2e-16 ***
-    ## zipcode98007   2.079e+05  3.056e+04   6.804 1.05e-11 ***
-    ## zipcode98008   2.123e+05  2.907e+04   7.304 2.93e-13 ***
-    ## zipcode98010   1.043e+05  2.606e+04   4.002 6.30e-05 ***
-    ## zipcode98011   4.858e+04  3.764e+04   1.291 0.196867    
-    ## zipcode98014   7.535e+04  4.144e+04   1.818 0.069081 .  
-    ## zipcode98019   5.665e+04  4.145e+04   1.367 0.171764    
-    ## zipcode98022   4.451e+04  2.294e+04   1.941 0.052309 .  
-    ## zipcode98023  -4.331e+04  1.415e+04  -3.061 0.002207 ** 
-    ## zipcode98024   1.440e+05  3.734e+04   3.858 0.000115 ***
-    ## zipcode98027   1.586e+05  2.515e+04   6.307 2.91e-10 ***
-    ## zipcode98028   4.009e+04  3.669e+04   1.093 0.274503    
-    ## zipcode98029   2.032e+05  2.885e+04   7.043 1.96e-12 ***
-    ## zipcode98030   7.758e+03  1.660e+04   0.467 0.640263    
-    ## zipcode98031   8.761e+03  1.738e+04   0.504 0.614177    
-    ## zipcode98032  -7.291e+03  2.060e+04  -0.354 0.723411    
-    ## zipcode98033   3.013e+05  3.151e+04   9.562  < 2e-16 ***
-    ## zipcode98034   1.321e+05  3.376e+04   3.913 9.16e-05 ***
-    ## zipcode98038   5.099e+04  1.925e+04   2.649 0.008091 ** 
-    ## zipcode98039   1.239e+06  3.770e+04  32.879  < 2e-16 ***
-    ## zipcode98040   4.664e+05  2.450e+04  19.034  < 2e-16 ***
-    ## zipcode98042   1.791e+04  1.623e+04   1.103 0.269951    
-    ## zipcode98045   1.379e+05  3.615e+04   3.814 0.000137 ***
-    ## zipcode98052   1.797e+05  3.218e+04   5.583 2.40e-08 ***
-    ## zipcode98053   1.544e+05  3.473e+04   4.446 8.81e-06 ***
-    ## zipcode98055   3.497e+04  1.940e+04   1.803 0.071455 .  
-    ## zipcode98056   7.238e+04  2.119e+04   3.416 0.000636 ***
-    ## zipcode98058   1.925e+04  1.850e+04   1.041 0.297961    
-    ## zipcode98059   6.595e+04  2.079e+04   3.173 0.001514 ** 
-    ## zipcode98065   9.321e+04  3.276e+04   2.845 0.004451 ** 
-    ## zipcode98070  -6.463e+04  2.414e+04  -2.677 0.007434 ** 
-    ## zipcode98072   7.629e+04  3.766e+04   2.026 0.042801 *  
-    ## zipcode98074   1.423e+05  3.069e+04   4.638 3.54e-06 ***
-    ## zipcode98075   1.453e+05  2.956e+04   4.915 8.98e-07 ***
-    ## zipcode98077   6.125e+04  3.923e+04   1.561 0.118440    
-    ## zipcode98092  -2.225e+04  1.524e+04  -1.460 0.144308    
-    ## zipcode98102   4.492e+05  3.229e+04  13.911  < 2e-16 ***
-    ## zipcode98103   2.664e+05  3.043e+04   8.754  < 2e-16 ***
-    ## zipcode98105   4.127e+05  3.123e+04  13.214  < 2e-16 ***
-    ## zipcode98106   1.110e+05  2.261e+04   4.911 9.15e-07 ***
-    ## zipcode98107   2.729e+05  3.135e+04   8.703  < 2e-16 ***
-    ## zipcode98108   8.321e+04  2.530e+04   3.289 0.001008 ** 
-    ## zipcode98109   4.491e+05  3.233e+04  13.889  < 2e-16 ***
-    ## zipcode98112   5.743e+05  2.856e+04  20.106  < 2e-16 ***
-    ## zipcode98115   2.659e+05  3.087e+04   8.613  < 2e-16 ***
-    ## zipcode98116   2.322e+05  2.512e+04   9.243  < 2e-16 ***
-    ## zipcode98117   2.373e+05  3.126e+04   7.592 3.31e-14 ***
-    ## zipcode98118   1.371e+05  2.196e+04   6.242 4.42e-10 ***
-    ## zipcode98119   4.235e+05  3.058e+04  13.849  < 2e-16 ***
-    ## zipcode98122   2.727e+05  2.727e+04  10.000  < 2e-16 ***
-    ## zipcode98125   1.266e+05  3.333e+04   3.798 0.000146 ***
-    ## zipcode98126   1.420e+05  2.304e+04   6.164 7.24e-10 ***
-    ## zipcode98133   8.428e+04  3.440e+04   2.450 0.014291 *  
-    ## zipcode98136   1.938e+05  2.360e+04   8.212 2.35e-16 ***
-    ## zipcode98144   2.283e+05  2.520e+04   9.060  < 2e-16 ***
-    ## zipcode98146   6.979e+04  2.107e+04   3.312 0.000927 ***
-    ## zipcode98148   4.653e+04  2.834e+04   1.642 0.100614    
-    ## zipcode98155   6.006e+04  3.581e+04   1.677 0.093543 .  
-    ## zipcode98166   1.865e+04  1.945e+04   0.959 0.337491    
-    ## zipcode98168   4.651e+04  2.018e+04   2.305 0.021195 *  
-    ## zipcode98177   1.281e+05  3.577e+04   3.581 0.000343 ***
-    ## zipcode98178   1.560e+04  2.103e+04   0.742 0.458127    
-    ## zipcode98188   2.183e+04  2.156e+04   1.013 0.311205    
-    ## zipcode98198  -1.695e+04  1.626e+04  -1.043 0.297182    
-    ## zipcode98199   3.024e+05  2.979e+04  10.151  < 2e-16 ***
-    ## lat            1.941e+05  7.469e+04   2.599 0.009364 ** 
-    ## long          -1.322e+05  5.628e+04  -2.349 0.018846 *  
-    ## sqft_living15  9.624e+00  3.372e+00   2.855 0.004314 ** 
-    ## sqft_lot15    -1.003e-01  6.933e-02  -1.447 0.147887    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 163100 on 16100 degrees of freedom
-    ## Multiple R-squared:  0.8063, Adjusted R-squared:  0.8052 
-    ## F-statistic: 779.1 on 86 and 16100 DF,  p-value: < 2.2e-16
 
 Comparative boxplots to examine the relationship between
 categorical/ordinal predictors and a numeric response (Price)
 
 ``` r
+par(mfrow=c(2,2))
 boxplot(price~waterfront, data = King_clean, main = "Price by Waterfront")
-```
-
-![](MLR_files/figure-markdown_github/unnamed-chunk-7-1.png)
-
-``` r
 boxplot(price~renovated, data = King_clean, main = "Price by Renovated")
-```
-
-![](MLR_files/figure-markdown_github/unnamed-chunk-7-2.png)
-
-``` r
 boxplot(price~zipcode, data = King_clean, main = "Price by Zipcode")
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-7-3.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 The relationship of predictor & response is only looked at on individual
 basis, not in the lm1.king model. We do not know how those predictors
@@ -685,113 +573,8 @@ CV = sample(c("Train", "Valid"), size = n, replace = T, prob = c(.70, .30))
 
 ``` r
 king.lm2 = lm(price~., data = King_clean[CV == "Train",])
-summary(king.lm2)
+#summary(king.lm2)
 ```
-
-    ## 
-    ## Call:
-    ## lm(formula = price ~ ., data = King_clean[CV == "Train", ])
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -1102156   -70141    -1363    60972  3019709 
-    ## 
-    ## Coefficients: (1 not defined because of singularities)
-    ##                 Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)   -2.485e+07  8.696e+06  -2.858 0.004272 ** 
-    ## bedrooms      -2.389e+04  2.046e+03 -11.677  < 2e-16 ***
-    ## bathrooms      2.407e+04  3.628e+03   6.636 3.36e-11 ***
-    ## sqft_living    1.166e+02  4.859e+00  23.999  < 2e-16 ***
-    ## sqft_lot       2.528e-01  5.140e-02   4.919 8.84e-07 ***
-    ## floors        -4.880e+04  4.301e+03 -11.347  < 2e-16 ***
-    ## waterfront1    6.316e+05  1.942e+04  32.518  < 2e-16 ***
-    ## view           5.960e+04  2.385e+03  24.987  < 2e-16 ***
-    ## condition      2.649e+04  2.660e+03   9.960  < 2e-16 ***
-    ## grade          5.741e+04  2.476e+03  23.185  < 2e-16 ***
-    ## sqft_above     8.544e+01  4.939e+00  17.298  < 2e-16 ***
-    ## sqft_basement         NA         NA      NA       NA    
-    ## yr_built      -5.952e+02  8.898e+01  -6.690 2.34e-11 ***
-    ## yr_renovated   2.721e+03  4.819e+02   5.646 1.68e-08 ***
-    ## renovated1    -5.402e+06  9.619e+05  -5.616 2.00e-08 ***
-    ## zipcode98002   3.248e+04  2.115e+04   1.536 0.124631    
-    ## zipcode98003  -2.566e+04  1.769e+04  -1.450 0.146990    
-    ## zipcode98004   7.450e+05  3.229e+04  23.072  < 2e-16 ***
-    ## zipcode98005   2.467e+05  3.423e+04   7.207 6.09e-13 ***
-    ## zipcode98006   2.316e+05  2.828e+04   8.188 2.94e-16 ***
-    ## zipcode98007   1.945e+05  3.539e+04   5.495 3.99e-08 ***
-    ## zipcode98008   2.164e+05  3.376e+04   6.410 1.51e-10 ***
-    ## zipcode98010   1.121e+05  2.959e+04   3.789 0.000152 ***
-    ## zipcode98011   3.896e+04  4.406e+04   0.884 0.376591    
-    ## zipcode98014   7.043e+04  4.808e+04   1.465 0.143016    
-    ## zipcode98019   5.398e+04  4.797e+04   1.125 0.260443    
-    ## zipcode98022   4.183e+04  2.699e+04   1.550 0.121226    
-    ## zipcode98023  -4.892e+04  1.669e+04  -2.930 0.003392 ** 
-    ## zipcode98024   1.432e+05  4.324e+04   3.311 0.000931 ***
-    ## zipcode98027   1.511e+05  2.917e+04   5.182 2.23e-07 ***
-    ## zipcode98028   3.115e+04  4.270e+04   0.729 0.465766    
-    ## zipcode98029   1.963e+05  3.367e+04   5.831 5.66e-09 ***
-    ## zipcode98030  -4.211e+03  1.928e+04  -0.218 0.827082    
-    ## zipcode98031   4.926e+03  2.044e+04   0.241 0.809538    
-    ## zipcode98032  -1.566e+04  2.415e+04  -0.648 0.516856    
-    ## zipcode98033   2.916e+05  3.672e+04   7.942 2.19e-15 ***
-    ## zipcode98034   1.233e+05  3.941e+04   3.129 0.001758 ** 
-    ## zipcode98038   4.265e+04  2.240e+04   1.904 0.056966 .  
-    ## zipcode98039   1.364e+06  4.632e+04  29.447  < 2e-16 ***
-    ## zipcode98040   4.838e+05  2.865e+04  16.885  < 2e-16 ***
-    ## zipcode98042   1.285e+04  1.902e+04   0.675 0.499380    
-    ## zipcode98045   1.362e+05  4.152e+04   3.279 0.001044 ** 
-    ## zipcode98052   1.728e+05  3.755e+04   4.602 4.24e-06 ***
-    ## zipcode98053   1.528e+05  4.032e+04   3.789 0.000152 ***
-    ## zipcode98055   3.338e+04  2.253e+04   1.482 0.138451    
-    ## zipcode98056   6.875e+04  2.476e+04   2.777 0.005502 ** 
-    ## zipcode98058   1.231e+04  2.160e+04   0.570 0.568811    
-    ## zipcode98059   5.634e+04  2.417e+04   2.331 0.019764 *  
-    ## zipcode98065   7.734e+04  3.802e+04   2.034 0.041985 *  
-    ## zipcode98070  -8.253e+04  2.797e+04  -2.950 0.003183 ** 
-    ## zipcode98072   7.080e+04  4.390e+04   1.613 0.106866    
-    ## zipcode98074   1.430e+05  3.558e+04   4.020 5.87e-05 ***
-    ## zipcode98075   1.341e+05  3.425e+04   3.916 9.05e-05 ***
-    ## zipcode98077   5.562e+04  4.560e+04   1.220 0.222596    
-    ## zipcode98092  -3.226e+04  1.777e+04  -1.816 0.069404 .  
-    ## zipcode98102   3.886e+05  3.760e+04  10.334  < 2e-16 ***
-    ## zipcode98103   2.631e+05  3.554e+04   7.403 1.43e-13 ***
-    ## zipcode98105   4.033e+05  3.672e+04  10.984  < 2e-16 ***
-    ## zipcode98106   1.047e+05  2.644e+04   3.960 7.55e-05 ***
-    ## zipcode98107   2.737e+05  3.651e+04   7.497 7.03e-14 ***
-    ## zipcode98108   7.454e+04  2.934e+04   2.541 0.011078 *  
-    ## zipcode98109   4.228e+05  3.793e+04  11.146  < 2e-16 ***
-    ## zipcode98112   5.825e+05  3.318e+04  17.555  < 2e-16 ***
-    ## zipcode98115   2.595e+05  3.600e+04   7.209 6.01e-13 ***
-    ## zipcode98116   2.349e+05  2.931e+04   8.014 1.22e-15 ***
-    ## zipcode98117   2.321e+05  3.648e+04   6.363 2.06e-10 ***
-    ## zipcode98118   1.297e+05  2.567e+04   5.055 4.38e-07 ***
-    ## zipcode98119   3.839e+05  3.603e+04  10.653  < 2e-16 ***
-    ## zipcode98122   2.807e+05  3.201e+04   8.767  < 2e-16 ***
-    ## zipcode98125   1.148e+05  3.896e+04   2.946 0.003228 ** 
-    ## zipcode98126   1.417e+05  2.702e+04   5.244 1.60e-07 ***
-    ## zipcode98133   8.338e+04  4.024e+04   2.072 0.038257 *  
-    ## zipcode98136   1.826e+05  2.779e+04   6.573 5.15e-11 ***
-    ## zipcode98144   2.221e+05  2.937e+04   7.562 4.26e-14 ***
-    ## zipcode98146   6.408e+04  2.472e+04   2.592 0.009542 ** 
-    ## zipcode98148   3.171e+04  3.202e+04   0.990 0.322061    
-    ## zipcode98155   5.573e+04  4.184e+04   1.332 0.182861    
-    ## zipcode98166   1.318e+04  2.267e+04   0.581 0.560979    
-    ## zipcode98168   4.363e+04  2.366e+04   1.844 0.065149 .  
-    ## zipcode98177   1.330e+05  4.181e+04   3.182 0.001468 ** 
-    ## zipcode98178   6.537e+03  2.455e+04   0.266 0.790032    
-    ## zipcode98188   1.416e+04  2.539e+04   0.558 0.576889    
-    ## zipcode98198  -2.791e+04  1.900e+04  -1.469 0.141802    
-    ## zipcode98199   2.982e+05  3.460e+04   8.619  < 2e-16 ***
-    ## lat            2.000e+05  8.728e+04   2.292 0.021925 *  
-    ## long          -1.312e+05  6.494e+04  -2.021 0.043355 *  
-    ## sqft_living15  1.293e+01  3.957e+00   3.267 0.001089 ** 
-    ## sqft_lot15    -1.097e-01  8.074e-02  -1.359 0.174214    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 160100 on 11292 degrees of freedom
-    ## Multiple R-squared:  0.8116, Adjusted R-squared:  0.8101 
-    ## F-statistic: 565.6 on 86 and 11292 DF,  p-value: < 2.2e-16
 
 Mixed model stepwise: use the final model above
 
@@ -799,73 +582,99 @@ Mixed model stepwise: use the final model above
 mixed.king2 = step(king.lm2)
 ```
 
-    ## Start:  AIC=272807.1
+    ## Start:  AIC=270870.6
     ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
     ##     waterfront + view + condition + grade + sqft_above + sqft_basement + 
     ##     yr_built + yr_renovated + renovated + zipcode + lat + long + 
     ##     sqft_living15 + sqft_lot15
     ## 
     ## 
-    ## Step:  AIC=272807.1
+    ## Step:  AIC=270870.6
     ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
     ##     waterfront + view + condition + grade + sqft_above + yr_built + 
     ##     yr_renovated + renovated + zipcode + lat + long + sqft_living15 + 
     ##     sqft_lot15
     ## 
     ##                 Df  Sum of Sq        RSS    AIC
-    ## - sqft_lot15     1 4.7325e+10 2.8945e+14 272807
-    ## <none>                        2.8940e+14 272807
-    ## - long           1 1.0463e+11 2.8951e+14 272809
-    ## - lat            1 1.3463e+11 2.8954e+14 272810
-    ## - sqft_living15  1 2.7361e+11 2.8968e+14 272816
-    ## - sqft_lot       1 6.2002e+11 2.9002e+14 272829
-    ## - renovated      1 8.0836e+11 2.9021e+14 272837
-    ## - yr_renovated   1 8.1701e+11 2.9022e+14 272837
-    ## - bathrooms      1 1.1287e+12 2.9053e+14 272849
-    ## - yr_built       1 1.1469e+12 2.9055e+14 272850
-    ## - condition      1 2.5423e+12 2.9195e+14 272905
-    ## - floors         1 3.2998e+12 2.9270e+14 272934
-    ## - bedrooms       1 3.4944e+12 2.9290e+14 272942
-    ## - sqft_above     1 7.6692e+12 2.9707e+14 273103
-    ## - grade          1 1.3777e+13 3.0318e+14 273334
-    ## - sqft_living    1 1.4761e+13 3.0417e+14 273371
-    ## - view           1 1.6002e+13 3.0541e+14 273417
-    ## - waterfront     1 2.7101e+13 3.1650e+14 273824
-    ## - zipcode       69 1.8181e+14 4.7121e+14 278216
+    ## - lat            1 4.6469e+10 2.9641e+14 270870
+    ## - sqft_lot15     1 5.1302e+10 2.9641e+14 270871
+    ## <none>                        2.9636e+14 270871
+    ## - sqft_living15  1 8.7335e+10 2.9645e+14 270872
+    ## - long           1 8.8897e+10 2.9645e+14 270872
+    ## - renovated      1 3.9686e+11 2.9676e+14 270884
+    ## - yr_renovated   1 4.0743e+11 2.9677e+14 270884
+    ## - sqft_lot       1 6.3559e+11 2.9700e+14 270893
+    ## - yr_built       1 1.2026e+12 2.9756e+14 270914
+    ## - bathrooms      1 1.3062e+12 2.9767e+14 270918
+    ## - condition      1 2.8656e+12 2.9923e+14 270977
+    ## - floors         1 3.3510e+12 2.9971e+14 270995
+    ## - bedrooms       1 4.2670e+12 3.0063e+14 271030
+    ## - sqft_above     1 6.7756e+12 3.0314e+14 271124
+    ## - grade          1 1.2905e+13 3.0927e+14 271350
+    ## - view           1 1.6792e+13 3.1315e+14 271490
+    ## - sqft_living    1 1.8639e+13 3.1500e+14 271557
+    ## - waterfront     1 2.0323e+13 3.1668e+14 271617
+    ## - zipcode       69 1.8431e+14 4.8067e+14 276189
     ## 
-    ## Step:  AIC=272807
+    ## Step:  AIC=270870.4
     ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
     ##     waterfront + view + condition + grade + sqft_above + yr_built + 
-    ##     yr_renovated + renovated + zipcode + lat + long + sqft_living15
+    ##     yr_renovated + renovated + zipcode + long + sqft_living15 + 
+    ##     sqft_lot15
     ## 
     ##                 Df  Sum of Sq        RSS    AIC
-    ## <none>                        2.8945e+14 272807
-    ## - long           1 1.1421e+11 2.8957e+14 272809
-    ## - lat            1 1.3344e+11 2.8958e+14 272810
-    ## - sqft_living15  1 2.6174e+11 2.8971e+14 272815
-    ## - sqft_lot       1 7.0154e+11 2.9015e+14 272832
-    ## - renovated      1 8.0424e+11 2.9026e+14 272837
-    ## - yr_renovated   1 8.1286e+11 2.9026e+14 272837
-    ## - bathrooms      1 1.1431e+12 2.9059e+14 272850
-    ## - yr_built       1 1.1499e+12 2.9060e+14 272850
-    ## - condition      1 2.5302e+12 2.9198e+14 272904
-    ## - floors         1 3.2813e+12 2.9273e+14 272933
-    ## - bedrooms       1 3.4680e+12 2.9292e+14 272940
-    ## - sqft_above     1 7.6624e+12 2.9711e+14 273102
-    ## - grade          1 1.3804e+13 3.0326e+14 273335
-    ## - sqft_living    1 1.4716e+13 3.0417e+14 273369
-    ## - view           1 1.6028e+13 3.0548e+14 273418
-    ## - waterfront     1 2.7108e+13 3.1656e+14 273824
-    ## - zipcode       69 1.8233e+14 4.7178e+14 278228
+    ## - sqft_lot15     1 5.1468e+10 2.9646e+14 270870
+    ## <none>                        2.9641e+14 270870
+    ## - sqft_living15  1 8.9604e+10 2.9650e+14 270872
+    ## - long           1 1.0036e+11 2.9651e+14 270872
+    ## - renovated      1 3.9572e+11 2.9680e+14 270883
+    ## - yr_renovated   1 4.0629e+11 2.9681e+14 270884
+    ## - sqft_lot       1 6.3464e+11 2.9704e+14 270893
+    ## - yr_built       1 1.1978e+12 2.9760e+14 270914
+    ## - bathrooms      1 1.3038e+12 2.9771e+14 270918
+    ## - condition      1 2.8502e+12 2.9926e+14 270976
+    ## - floors         1 3.3766e+12 2.9978e+14 270996
+    ## - bedrooms       1 4.2733e+12 3.0068e+14 271030
+    ## - sqft_above     1 6.7726e+12 3.0318e+14 271123
+    ## - grade          1 1.2940e+13 3.0935e+14 271350
+    ## - view           1 1.6770e+13 3.1318e+14 271489
+    ## - sqft_living    1 1.8638e+13 3.1504e+14 271556
+    ## - waterfront     1 2.0289e+13 3.1670e+14 271615
+    ## - zipcode       69 2.4604e+14 5.4244e+14 277551
+    ## 
+    ## Step:  AIC=270870.3
+    ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
+    ##     waterfront + view + condition + grade + sqft_above + yr_built + 
+    ##     yr_renovated + renovated + zipcode + long + sqft_living15
+    ## 
+    ##                 Df  Sum of Sq        RSS    AIC
+    ## <none>                        2.9646e+14 270870
+    ## - sqft_living15  1 8.2519e+10 2.9654e+14 270871
+    ## - long           1 1.0748e+11 2.9657e+14 270872
+    ## - renovated      1 3.9137e+11 2.9685e+14 270883
+    ## - yr_renovated   1 4.0190e+11 2.9686e+14 270884
+    ## - sqft_lot       1 7.6386e+11 2.9722e+14 270897
+    ## - yr_built       1 1.1998e+12 2.9766e+14 270914
+    ## - bathrooms      1 1.3233e+12 2.9778e+14 270919
+    ## - condition      1 2.8462e+12 2.9930e+14 270976
+    ## - floors         1 3.3589e+12 2.9982e+14 270995
+    ## - bedrooms       1 4.2503e+12 3.0071e+14 271029
+    ## - sqft_above     1 6.7588e+12 3.0322e+14 271123
+    ## - grade          1 1.2956e+13 3.0941e+14 271351
+    ## - view           1 1.6791e+13 3.1325e+14 271490
+    ## - sqft_living    1 1.8598e+13 3.1506e+14 271555
+    ## - waterfront     1 2.0283e+13 3.1674e+14 271615
+    ## - zipcode       69 2.4666e+14 5.4312e+14 277563
 
 ``` r
 mixed.king2$anova
 ```
 
-    ##              Step Df   Deviance Resid. Df   Resid. Dev      AIC
-    ## 1                 NA         NA     11292 2.894037e+14 272807.1
-    ## 2 - sqft_basement  0 0.0000e+00     11292 2.894037e+14 272807.1
-    ## 3    - sqft_lot15  1 4.7325e+10     11293 2.894511e+14 272807.0
+    ##              Step Df    Deviance Resid. Df   Resid. Dev      AIC
+    ## 1                 NA          NA     11196 2.963605e+14 270870.6
+    ## 2 - sqft_basement  0           0     11196 2.963605e+14 270870.6
+    ## 3           - lat  1 46468642679     11197 2.964070e+14 270870.4
+    ## 4    - sqft_lot15  1 51468490919     11198 2.964584e+14 270870.3
 
 Stepwise removed sqft\_basement predictor again (sometimes removing
 sqft\_lot15 as well).
@@ -880,15 +689,15 @@ results = PredAcc(y,ypred)
 
     ## RMSEP
     ## ================
-    ## 171406.6 
+    ## 165216.5 
     ## 
     ## MAE
     ## ================
-    ## 96600.43 
+    ## 99614.76 
     ## 
     ## MAPE
     ## ================
-    ## 19.75749
+    ## 20.38741
 
 RMSEP = 161013.1 MAE = 97808.4 MAPE = 20.40%
 
@@ -935,7 +744,7 @@ kfold.results.full
 ```
 
     ##      RMSEP      MAE     MAPE
-    ## 1 164375.7 97683.93 0.199546
+    ## 1 164463.8 97670.71 0.199451
 
 We cannot use the full basic model as there are at least two predictors
 that are perfectly correlated; rank deficient means that at least one
@@ -949,7 +758,7 @@ kfold.results.step
 ```
 
     ##      RMSEP      MAE      MAPE
-    ## 1 164511.3 97717.62 0.1995409
+    ## 1 164628.4 97808.69 0.1997326
 
 RMSE is better for the step model than for the full model.
 
@@ -959,8 +768,8 @@ RMSE is better for the step model than for the full model.
 boot.results.full
 ```
 
-    ##      RMSEP      MAE      MAPE
-    ## 1 164533.6 97810.44 0.1995958
+    ##    RMSEP     MAE     MAPE
+    ## 1 163601 97884.4 0.200343
 
 ``` r
 boot.results.step = bootols.cv(mixed.king1, B=100)
@@ -968,22 +777,22 @@ boot.results.step = bootols.cv(mixed.king1, B=100)
 
     ## RMSEP
     ## ===============
-    ## 164690.9 
+    ## 165363.2 
     ## 
     ## MAE
     ## ===============
-    ## 97829.15 
+    ## 97768.9 
     ## 
     ## MAPE
     ## ===============
-    ## 0.1998342
+    ## 0.1992586
 
 ``` r
 boot.results.step
 ```
 
-    ##      RMSEP      MAE      MAPE
-    ## 1 164690.9 97829.15 0.1998342
+    ##      RMSEP     MAE      MAPE
+    ## 1 165363.2 97768.9 0.1992586
 
 boot.results.step had error rates smaller MAE (97719.86) and MAPE
 (19.93%). RMSE (164952) was a bit higher than that of the full model
@@ -1128,25 +937,26 @@ pairs.plus2(King_clean[,c(1:6,8:14,17:20)])
 Statplot() function provided in the .Rdata file can check for the
 distribution of the specified predictor or response.
 
+``` r
+#Statplot(King_clean$price)
+```
+
 It is very right skewed.
 
 Let’s try logging the price and see.
+
+``` r
+#Statplot(log(King_clean$price))
+```
 
 Using log transformation on the response (price) fixes the normality
 concern. Now, let’s see if that was the “best” transformation:
 
 ``` r
-BCtran(King_clean$price)
-```
-
-![](MLR_files/figure-markdown_github/unnamed-chunk-40-1.png) The results
-above show us that the best lambda is
-
-``` r
 myBC(King_clean$price)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-41-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-40-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1223,7 +1033,7 @@ Check “best” labmda for very skewed predictors.
 myBC(King_clean$bedrooms+1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-43-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-42-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1246,7 +1056,7 @@ myBC(King_clean$bedrooms+1)
 myBC(King_clean$bathrooms+1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-44-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-43-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1269,7 +1079,7 @@ myBC(King_clean$bathrooms+1)
 myBC(King_clean$sqft_living)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-45-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-44-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1292,7 +1102,7 @@ myBC(King_clean$sqft_living)
 myBC(King_clean$sqft_lot)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-46-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-45-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1315,7 +1125,7 @@ myBC(King_clean$sqft_lot)
 myBC(King_clean$floors+1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-47-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-46-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1338,7 +1148,7 @@ myBC(King_clean$floors+1)
 myBC(King_clean$view+1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-48-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-47-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1361,7 +1171,7 @@ myBC(King_clean$view+1)
 myBC(King_clean$condition)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-49-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-48-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1384,7 +1194,7 @@ myBC(King_clean$condition)
 myBC(King_clean$grade)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-50-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-49-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1407,7 +1217,7 @@ myBC(King_clean$grade)
 myBC(King_clean$sqft_above)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-51-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-50-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1430,7 +1240,7 @@ myBC(King_clean$sqft_above)
 myBC(King_clean$yr_built)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-52-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-51-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1453,7 +1263,7 @@ myBC(King_clean$yr_built)
 myBC(King_clean$yr_renovated+1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-53-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-52-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1476,7 +1286,7 @@ myBC(King_clean$yr_renovated+1)
 myBC(King_clean$lat)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-54-1.png)
+![](MLR_files/figure-markdown_github/unnamed-chunk-53-1.png)
 
     ## bcPower Transformation to Normality 
     ##   Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
@@ -1527,9 +1337,14 @@ par(mfrow=c(2,2))
 plot(trans.lm1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-57-1.png) This is not
+![](MLR_files/figure-markdown_github/unnamed-chunk-56-1.png) This is not
 that much better at all. Let’s fit a model with the price (response)
 transformed as well.
+
+``` r
+King_Trans$price =  log(King_Trans$price)
+#Statplot(King_Trans$price)
+```
 
 The reposnse is a go. It looks way better.
 
@@ -1539,7 +1354,7 @@ par(mfrow=c(2,2))
 plot(loghp.trans.lm1)
 ```
 
-![](MLR_files/figure-markdown_github/unnamed-chunk-59-1.png) The
+![](MLR_files/figure-markdown_github/unnamed-chunk-58-1.png) The
 residual vs. Fitted plot looks way better. Now, we have constant
 variance!
 
@@ -1733,65 +1548,13 @@ see how the stepwise selection sees it.
 Predictive performance of loghp.trans.lm2
 
 ``` r
-loghp.trans.lm2.step = step(loghp.trans.lm2)
-```
-
-    ## Start:  AIC=392675.3
-    ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
-    ##     waterfront + view + condition + grade + sqft_above + yr_built + 
-    ##     renovated + zipcode + lat + long + sqft_living15 + sqft_lot15
-    ## 
-    ##                 Df  Sum of Sq        RSS    AIC
-    ## - sqft_lot15     1 4.7371e+10 5.4954e+14 392675
-    ## - floors         1 6.0105e+10 5.4956e+14 392675
-    ## <none>                        5.4950e+14 392675
-    ## - long           1 1.7840e+11 5.4967e+14 392679
-    ## - lat            1 1.8424e+11 5.4968e+14 392679
-    ## - yr_built       1 9.0498e+11 5.5040e+14 392700
-    ## - renovated      1 1.0519e+12 5.5055e+14 392704
-    ## - bedrooms       1 2.4958e+12 5.5199e+14 392747
-    ## - condition      1 3.0758e+12 5.5257e+14 392764
-    ## - sqft_above     1 4.0573e+12 5.5355e+14 392792
-    ## - sqft_living    1 4.2477e+12 5.5374e+14 392798
-    ## - bathrooms      1 7.3806e+12 5.5688e+14 392889
-    ## - sqft_lot       1 1.0178e+13 5.5967e+14 392970
-    ## - sqft_living15  1 1.2946e+13 5.6244e+14 393050
-    ## - grade          1 2.0477e+13 5.6997e+14 393266
-    ## - view           1 2.0941e+13 5.7044e+14 393279
-    ## - waterfront     1 5.3778e+13 6.0327e+14 394185
-    ## - zipcode       69 2.7732e+14 8.2682e+14 399151
-    ## 
-    ## Step:  AIC=392674.7
-    ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
-    ##     waterfront + view + condition + grade + sqft_above + yr_built + 
-    ##     renovated + zipcode + lat + long + sqft_living15
-    ## 
-    ##                 Df  Sum of Sq        RSS    AIC
-    ## <none>                        5.4954e+14 392675
-    ## - floors         1 7.5573e+10 5.4962e+14 392675
-    ## - lat            1 1.8324e+11 5.4973e+14 392678
-    ## - long           1 1.8602e+11 5.4973e+14 392678
-    ## - yr_built       1 9.6115e+11 5.5050e+14 392701
-    ## - renovated      1 1.0501e+12 5.5059e+14 392704
-    ## - bedrooms       1 2.4632e+12 5.5201e+14 392745
-    ## - condition      1 3.0680e+12 5.5261e+14 392763
-    ## - sqft_above     1 4.1428e+12 5.5369e+14 392794
-    ## - sqft_living    1 4.2385e+12 5.5378e+14 392797
-    ## - bathrooms      1 7.3664e+12 5.5691e+14 392888
-    ## - sqft_lot       1 1.2240e+13 5.6178e+14 393029
-    ## - sqft_living15  1 1.2984e+13 5.6253e+14 393051
-    ## - grade          1 2.0463e+13 5.7001e+14 393265
-    ## - view           1 2.0935e+13 5.7048e+14 393278
-    ## - waterfront     1 5.3905e+13 6.0345e+14 394187
-    ## - zipcode       69 2.7771e+14 8.2725e+14 399157
-
-``` r
 loghp.trans.lm2.step$anova
 ```
 
-    ##           Step Df    Deviance Resid. Df   Resid. Dev      AIC
-    ## 1              NA          NA     16101 5.494956e+14 392675.3
-    ## 2 - sqft_lot15  1 47370775390     16102 5.495430e+14 392674.7
+    ##         Step Df    Deviance Resid. Df Resid. Dev       AIC
+    ## 1            NA          NA     16101   537.2240 -54953.62
+    ## 2   - floors  1 0.004404823     16102   537.2284 -54955.48
+    ## 3 - yr_built  1 0.009013392     16103   537.2374 -54957.21
 
 Two of the above predictors were removed from the final model.
 
@@ -1814,7 +1577,7 @@ MAEorig = mean(abs(y-ypred))
 RMSElog 
 ```
 
-    ## [1] Inf
+    ## [1] 135020.5
 
 ``` r
 RMSEorig
@@ -1826,7 +1589,7 @@ RMSEorig
 MAPElog
 ```
 
-    ## [1] Inf
+    ## [1] 0.1361329
 
 ``` r
 MAPEorig
@@ -1842,7 +1605,7 @@ MAPEorig
 MAElog
 ```
 
-    ## [1] Inf
+    ## [1] 74450.44
 
 ``` r
 MAEorig
@@ -1873,86 +1636,62 @@ cv.loghp.trans.lm2.step = lm(price~., data = King_Trans[CV == "Train",-13])
 cv.loghp.trans.lm2.step = step(cv.loghp.trans.lm2.step)
 ```
 
-    ## Start:  AIC=273340
+    ## Start:  AIC=-38186.55
     ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
     ##     waterfront + view + condition + grade + sqft_above + yr_built + 
     ##     renovated + zipcode + lat + long + sqft_living15 + sqft_lot15
     ## 
-    ##                 Df  Sum of Sq        RSS    AIC
-    ## - sqft_lot15     1 1.4416e+10 3.7896e+14 273338
-    ## - floors         1 1.8554e+10 3.7896e+14 273339
-    ## <none>                        3.7894e+14 273340
-    ## - long           1 8.5273e+10 3.7903e+14 273340
-    ## - lat            1 1.4683e+11 3.7909e+14 273342
-    ## - yr_built       1 5.2160e+11 3.7946e+14 273353
-    ## - renovated      1 9.9200e+11 3.7993e+14 273367
-    ## - bedrooms       1 1.6317e+12 3.8057e+14 273386
-    ## - sqft_above     1 2.5741e+12 3.8152e+14 273414
-    ## - condition      1 2.8014e+12 3.8174e+14 273421
-    ## - sqft_living    1 3.5406e+12 3.8248e+14 273443
-    ## - bathrooms      1 4.6180e+12 3.8356e+14 273474
-    ## - sqft_lot       1 7.2031e+12 3.8615e+14 273550
-    ## - sqft_living15  1 7.4842e+12 3.8643e+14 273558
-    ## - view           1 1.4259e+13 3.9320e+14 273754
-    ## - grade          1 1.5271e+13 3.9421e+14 273783
-    ## - waterfront     1 4.2045e+13 4.2099e+14 274524
-    ## - zipcode       69 1.8771e+14 5.6665e+14 277737
+    ##                 Df Sum of Sq    RSS    AIC
+    ## - floors         1      0.00 370.68 -38189
+    ## <none>                       370.68 -38187
+    ## - yr_built       1      0.17 370.85 -38183
+    ## - sqft_lot15     1      0.17 370.85 -38183
+    ## - long           1      0.61 371.29 -38170
+    ## - lat            1      1.12 371.80 -38155
+    ## - renovated      1      1.51 372.19 -38143
+    ## - bedrooms       1      1.59 372.27 -38140
+    ## - bathrooms      1      3.05 373.73 -38096
+    ## - sqft_above     1      3.89 374.57 -38071
+    ## - condition      1      9.04 379.72 -37918
+    ## - sqft_lot       1     11.53 382.21 -37844
+    ## - sqft_living15  1     12.94 383.62 -37803
+    ## - view           1     15.26 385.93 -37735
+    ## - waterfront     1     20.42 391.10 -37586
+    ## - sqft_living    1     21.56 392.24 -37553
+    ## - grade          1     31.26 401.94 -37278
+    ## - zipcode       69    359.24 729.92 -30707
     ## 
-    ## Step:  AIC=273338.4
-    ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + floors + 
-    ##     waterfront + view + condition + grade + sqft_above + yr_built + 
-    ##     renovated + zipcode + lat + long + sqft_living15
-    ## 
-    ##                 Df  Sum of Sq        RSS    AIC
-    ## - floors         1 2.3379e+10 3.7898e+14 273337
-    ## <none>                        3.7896e+14 273338
-    ## - long           1 8.8786e+10 3.7905e+14 273339
-    ## - lat            1 1.4427e+11 3.7910e+14 273341
-    ## - yr_built       1 5.4612e+11 3.7950e+14 273353
-    ## - renovated      1 9.9260e+11 3.7995e+14 273366
-    ## - bedrooms       1 1.6185e+12 3.8058e+14 273384
-    ## - sqft_above     1 2.6159e+12 3.8157e+14 273414
-    ## - condition      1 2.7994e+12 3.8176e+14 273419
-    ## - sqft_living    1 3.5367e+12 3.8249e+14 273441
-    ## - bathrooms      1 4.6122e+12 3.8357e+14 273473
-    ## - sqft_living15  1 7.5011e+12 3.8646e+14 273557
-    ## - sqft_lot       1 8.9563e+12 3.8791e+14 273600
-    ## - view           1 1.4256e+13 3.9321e+14 273753
-    ## - grade          1 1.5262e+13 3.9422e+14 273781
-    ## - waterfront     1 4.2124e+13 4.2108e+14 274524
-    ## - zipcode       69 1.8808e+14 5.6703e+14 277742
-    ## 
-    ## Step:  AIC=273337.1
+    ## Step:  AIC=-38188.51
     ## price ~ bedrooms + bathrooms + sqft_living + sqft_lot + waterfront + 
     ##     view + condition + grade + sqft_above + yr_built + renovated + 
-    ##     zipcode + lat + long + sqft_living15
+    ##     zipcode + lat + long + sqft_living15 + sqft_lot15
     ## 
-    ##                 Df  Sum of Sq        RSS    AIC
-    ## <none>                        3.7898e+14 273337
-    ## - long           1 9.0934e+10 3.7907e+14 273338
-    ## - lat            1 1.4969e+11 3.7913e+14 273340
-    ## - yr_built       1 5.9816e+11 3.7958e+14 273353
-    ## - renovated      1 9.8032e+11 3.7996e+14 273364
-    ## - bedrooms       1 1.6135e+12 3.8059e+14 273383
-    ## - condition      1 2.8290e+12 3.8181e+14 273419
-    ## - sqft_above     1 3.3171e+12 3.8230e+14 273433
-    ## - sqft_living    1 3.9310e+12 3.8291e+14 273451
-    ## - bathrooms      1 4.6309e+12 3.8361e+14 273472
-    ## - sqft_living15  1 7.4882e+12 3.8647e+14 273556
-    ## - sqft_lot       1 1.0583e+13 3.8956e+14 273645
-    ## - view           1 1.4289e+13 3.9327e+14 273752
-    ## - grade          1 1.5258e+13 3.9424e+14 273780
-    ## - waterfront     1 4.2118e+13 4.2110e+14 274523
-    ## - zipcode       69 1.8820e+14 5.6718e+14 277743
+    ##                 Df Sum of Sq    RSS    AIC
+    ## <none>                       370.68 -38189
+    ## - yr_built       1      0.17 370.85 -38185
+    ## - sqft_lot15     1      0.18 370.86 -38185
+    ## - long           1      0.61 371.29 -38172
+    ## - lat            1      1.12 371.80 -38157
+    ## - renovated      1      1.52 372.20 -38144
+    ## - bedrooms       1      1.60 372.28 -38142
+    ## - bathrooms      1      3.15 373.83 -38095
+    ## - sqft_above     1      5.67 376.35 -38020
+    ## - condition      1      9.06 379.74 -37919
+    ## - sqft_living15  1     12.95 383.64 -37804
+    ## - sqft_lot       1     13.18 383.86 -37798
+    ## - view           1     15.25 385.93 -37737
+    ## - waterfront     1     20.47 391.15 -37586
+    ## - sqft_living    1     22.87 393.55 -37517
+    ## - grade          1     31.26 401.94 -37280
+    ## - zipcode       69    360.74 731.42 -30686
 
 ``` r
 cv.loghp.trans.lm2.step$anova
 ```
 
-    ##           Step Df    Deviance Resid. Df   Resid. Dev      AIC
-    ## 1              NA          NA     11184 3.789423e+14 273340.0
-    ## 2 - sqft_lot15  1 14416076258     11185 3.789567e+14 273338.4
-    ## 3     - floors  1 23378745598     11186 3.789801e+14 273337.1
+    ##       Step Df    Deviance Resid. Df Resid. Dev       AIC
+    ## 1          NA          NA     11156   370.6791 -38186.55
+    ## 2 - floors  1 0.001427369     11157   370.6805 -38188.51
 
 ``` r
 summary(cv.loghp.trans.lm2.step)
@@ -1962,126 +1701,128 @@ summary(cv.loghp.trans.lm2.step)
     ## Call:
     ## lm(formula = price ~ bedrooms + bathrooms + sqft_living + sqft_lot + 
     ##     waterfront + view + condition + grade + sqft_above + yr_built + 
-    ##     renovated + zipcode + lat + long + sqft_living15, data = King_Trans[CV == 
-    ##     "Train", -13])
+    ##     renovated + zipcode + lat + long + sqft_living15 + sqft_lot15, 
+    ##     data = King_Trans[CV == "Train", -13])
     ## 
     ## Residuals:
     ##      Min       1Q   Median       3Q      Max 
-    ## -1089323   -80856    -8699    61362  5549275 
+    ## -1.31540 -0.09705  0.00378  0.10185  1.01372 
     ## 
     ## Coefficients:
     ##                 Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)   -2.937e+07  1.011e+07  -2.904 0.003687 ** 
-    ## bedrooms      -5.114e+04  7.411e+03  -6.901 5.44e-12 ***
-    ## bathrooms      9.695e+04  8.292e+03  11.691  < 2e-16 ***
-    ## sqft_living    1.238e+05  1.149e+04  10.772  < 2e-16 ***
-    ## sqft_lot       3.315e+05  1.875e+04  17.674  < 2e-16 ***
-    ## waterfront1    7.590e+05  2.153e+04  35.258  < 2e-16 ***
-    ## view           3.093e+05  1.506e+04  20.536  < 2e-16 ***
-    ## condition      2.806e+04  3.071e+03   9.138  < 2e-16 ***
-    ## grade          8.500e+05  4.005e+04  21.222  < 2e-16 ***
-    ## sqft_above     4.081e+05  4.124e+04   9.895  < 2e-16 ***
-    ## yr_built      -4.515e+02  1.075e+02  -4.202 2.67e-05 ***
-    ## renovated1     5.119e+04  9.516e+03   5.379 7.63e-08 ***
-    ## zipcode98002   6.275e+04  2.384e+04   2.632 0.008496 ** 
-    ## zipcode98003  -2.138e+04  2.082e+04  -1.027 0.304647    
-    ## zipcode98004   7.392e+05  3.760e+04  19.656  < 2e-16 ***
-    ## zipcode98005   2.421e+05  4.065e+04   5.955 2.68e-09 ***
-    ## zipcode98006   2.403e+05  3.320e+04   7.236 4.92e-13 ***
-    ## zipcode98007   2.100e+05  4.207e+04   4.993 6.03e-07 ***
-    ## zipcode98008   2.141e+05  3.953e+04   5.417 6.17e-08 ***
-    ## zipcode98010   8.191e+04  3.486e+04   2.350 0.018795 *  
-    ## zipcode98011   2.579e+04  5.116e+04   0.504 0.614231    
-    ## zipcode98014   5.210e+04  5.589e+04   0.932 0.351272    
-    ## zipcode98019   3.200e+04  5.565e+04   0.575 0.565254    
-    ## zipcode98022   3.977e+04  3.089e+04   1.288 0.197908    
-    ## zipcode98023  -3.811e+04  1.924e+04  -1.981 0.047606 *  
-    ## zipcode98024   1.455e+05  4.921e+04   2.957 0.003108 ** 
-    ## zipcode98027   1.713e+05  3.434e+04   4.987 6.21e-07 ***
-    ## zipcode98028   2.760e+04  4.990e+04   0.553 0.580282    
-    ## zipcode98029   1.965e+05  3.893e+04   5.048 4.54e-07 ***
-    ## zipcode98030   4.630e+03  2.243e+04   0.206 0.836479    
-    ## zipcode98031  -5.800e+03  2.338e+04  -0.248 0.804032    
-    ## zipcode98032   1.386e+04  2.799e+04   0.495 0.620508    
-    ## zipcode98033   3.210e+05  4.293e+04   7.476 8.24e-14 ***
-    ## zipcode98034   1.333e+05  4.601e+04   2.898 0.003768 ** 
-    ## zipcode98038   3.153e+04  2.578e+04   1.223 0.221344    
-    ## zipcode98039   1.289e+06  5.021e+04  25.666  < 2e-16 ***
-    ## zipcode98040   4.742e+05  3.342e+04  14.189  < 2e-16 ***
-    ## zipcode98042   8.900e+03  2.194e+04   0.406 0.685019    
-    ## zipcode98045   1.105e+05  4.829e+04   2.287 0.022190 *  
-    ## zipcode98052   1.666e+05  4.383e+04   3.802 0.000145 ***
-    ## zipcode98053   1.520e+05  4.702e+04   3.233 0.001230 ** 
-    ## zipcode98055   4.583e+04  2.637e+04   1.738 0.082225 .  
-    ## zipcode98056   8.997e+04  2.889e+04   3.114 0.001851 ** 
-    ## zipcode98058   1.637e+04  2.501e+04   0.655 0.512780    
-    ## zipcode98059   7.421e+04  2.819e+04   2.632 0.008489 ** 
-    ## zipcode98065   1.060e+05  4.390e+04   2.416 0.015726 *  
-    ## zipcode98070  -1.146e+05  3.335e+04  -3.435 0.000594 ***
-    ## zipcode98072   4.675e+04  5.098e+04   0.917 0.359182    
-    ## zipcode98074   1.412e+05  4.150e+04   3.402 0.000671 ***
-    ## zipcode98075   1.549e+05  4.003e+04   3.870 0.000110 ***
-    ## zipcode98077   4.565e+04  5.335e+04   0.856 0.392208    
-    ## zipcode98092  -3.694e+04  2.059e+04  -1.794 0.072860 .  
-    ## zipcode98102   5.743e+05  4.393e+04  13.074  < 2e-16 ***
-    ## zipcode98103   3.089e+05  4.173e+04   7.403 1.43e-13 ***
-    ## zipcode98105   4.671e+05  4.283e+04  10.907  < 2e-16 ***
-    ## zipcode98106   1.657e+05  3.080e+04   5.381 7.54e-08 ***
-    ## zipcode98107   3.090e+05  4.299e+04   7.188 7.02e-13 ***
-    ## zipcode98108   1.388e+05  3.541e+04   3.920 8.90e-05 ***
-    ## zipcode98109   4.909e+05  4.419e+04  11.110  < 2e-16 ***
-    ## zipcode98112   6.406e+05  3.933e+04  16.286  < 2e-16 ***
-    ## zipcode98115   3.035e+05  4.218e+04   7.195 6.65e-13 ***
-    ## zipcode98116   2.785e+05  3.429e+04   8.122 5.05e-16 ***
-    ## zipcode98117   2.868e+05  4.279e+04   6.703 2.14e-11 ***
-    ## zipcode98118   1.900e+05  3.002e+04   6.329 2.56e-10 ***
-    ## zipcode98119   4.809e+05  4.160e+04  11.559  < 2e-16 ***
-    ## zipcode98122   3.181e+05  3.745e+04   8.494  < 2e-16 ***
-    ## zipcode98125   1.402e+05  4.547e+04   3.082 0.002058 ** 
-    ## zipcode98126   2.045e+05  3.141e+04   6.511 7.78e-11 ***
-    ## zipcode98133   1.039e+05  4.700e+04   2.211 0.027049 *  
-    ## zipcode98136   2.419e+05  3.255e+04   7.433 1.14e-13 ***
-    ## zipcode98144   2.862e+05  3.435e+04   8.331  < 2e-16 ***
-    ## zipcode98146   1.032e+05  2.866e+04   3.601 0.000319 ***
-    ## zipcode98148   4.707e+04  3.876e+04   1.215 0.224577    
-    ## zipcode98155   6.693e+04  4.886e+04   1.370 0.170799    
-    ## zipcode98166   2.238e+04  2.671e+04   0.838 0.402217    
-    ## zipcode98168   7.259e+04  2.733e+04   2.656 0.007925 ** 
-    ## zipcode98177   1.563e+05  4.863e+04   3.214 0.001311 ** 
-    ## zipcode98178   4.088e+04  2.900e+04   1.410 0.158649    
-    ## zipcode98188   4.234e+04  2.976e+04   1.423 0.154807    
-    ## zipcode98198  -5.400e+03  2.199e+04  -0.246 0.805982    
-    ## zipcode98199   3.507e+05  4.082e+04   8.591  < 2e-16 ***
-    ## lat            2.133e+05  1.015e+05   2.102 0.035577 *  
-    ## long          -1.229e+05  7.504e+04  -1.638 0.101389    
-    ## sqft_living15  6.683e+01  4.496e+00  14.867  < 2e-16 ***
+    ## (Intercept)   -6.256e+01  1.016e+01  -6.155 7.76e-10 ***
+    ## bedrooms      -5.047e-02  7.280e-03  -6.932 4.38e-12 ***
+    ## bathrooms      7.986e-02  8.198e-03   9.741  < 2e-16 ***
+    ## sqft_living    2.964e-01  1.130e-02  26.237  < 2e-16 ***
+    ## sqft_lot       4.167e-01  2.092e-02  19.917  < 2e-16 ***
+    ## waterfront1    5.419e-01  2.183e-02  24.822  < 2e-16 ***
+    ## view           3.210e-01  1.498e-02  21.427  < 2e-16 ***
+    ## condition      5.051e-02  3.059e-03  16.511  < 2e-16 ***
+    ## grade          1.221e+00  3.982e-02  30.676  < 2e-16 ***
+    ## sqft_above     5.299e-01  4.058e-02  13.059  < 2e-16 ***
+    ## yr_built      -2.425e-04  1.072e-04  -2.262 0.023737 *  
+    ## renovated1     6.338e-02  9.368e-03   6.765 1.40e-11 ***
+    ## zipcode98002   3.116e-02  2.385e-02   1.307 0.191400    
+    ## zipcode98003  -4.188e-03  2.082e-02  -0.201 0.840583    
+    ## zipcode98004   9.685e-01  3.668e-02  26.402  < 2e-16 ***
+    ## zipcode98005   5.843e-01  3.964e-02  14.741  < 2e-16 ***
+    ## zipcode98006   5.338e-01  3.250e-02  16.426  < 2e-16 ***
+    ## zipcode98007   5.349e-01  4.059e-02  13.179  < 2e-16 ***
+    ## zipcode98008   5.363e-01  3.877e-02  13.834  < 2e-16 ***
+    ## zipcode98010   3.163e-01  3.412e-02   9.271  < 2e-16 ***
+    ## zipcode98011   2.050e-01  5.015e-02   4.089 4.37e-05 ***
+    ## zipcode98014   2.097e-01  5.543e-02   3.783 0.000156 ***
+    ## zipcode98019   1.669e-01  5.544e-02   3.010 0.002621 ** 
+    ## zipcode98022   2.115e-01  3.075e-02   6.877 6.43e-12 ***
+    ## zipcode98023  -5.852e-02  1.909e-02  -3.065 0.002183 ** 
+    ## zipcode98024   3.953e-01  5.044e-02   7.837 5.05e-15 ***
+    ## zipcode98027   4.655e-01  3.374e-02  13.794  < 2e-16 ***
+    ## zipcode98028   1.645e-01  4.887e-02   3.366 0.000765 ***
+    ## zipcode98029   5.527e-01  3.869e-02  14.287  < 2e-16 ***
+    ## zipcode98030   4.881e-02  2.214e-02   2.204 0.027523 *  
+    ## zipcode98031   3.662e-02  2.306e-02   1.588 0.112369    
+    ## zipcode98032  -7.054e-02  2.815e-02  -2.506 0.012220 *  
+    ## zipcode98033   6.091e-01  4.216e-02  14.449  < 2e-16 ***
+    ## zipcode98034   3.304e-01  4.506e-02   7.331 2.44e-13 ***
+    ## zipcode98038   2.039e-01  2.575e-02   7.919 2.62e-15 ***
+    ## zipcode98039   1.116e+00  4.938e-02  22.590  < 2e-16 ***
+    ## zipcode98040   7.556e-01  3.286e-02  22.992  < 2e-16 ***
+    ## zipcode98042   8.512e-02  2.173e-02   3.917 9.03e-05 ***
+    ## zipcode98045   3.959e-01  4.897e-02   8.084 6.90e-16 ***
+    ## zipcode98052   4.691e-01  4.305e-02  10.895  < 2e-16 ***
+    ## zipcode98053   4.374e-01  4.638e-02   9.430  < 2e-16 ***
+    ## zipcode98055   9.560e-02  2.569e-02   3.721 0.000200 ***
+    ## zipcode98056   2.598e-01  2.835e-02   9.164  < 2e-16 ***
+    ## zipcode98058   1.243e-01  2.476e-02   5.021 5.23e-07 ***
+    ## zipcode98059   2.740e-01  2.774e-02   9.876  < 2e-16 ***
+    ## zipcode98065   4.124e-01  4.409e-02   9.354  < 2e-16 ***
+    ## zipcode98070   1.382e-01  3.287e-02   4.204 2.64e-05 ***
+    ## zipcode98072   2.368e-01  5.002e-02   4.733 2.24e-06 ***
+    ## zipcode98074   4.642e-01  4.115e-02  11.282  < 2e-16 ***
+    ## zipcode98075   4.801e-01  3.978e-02  12.070  < 2e-16 ***
+    ## zipcode98077   2.352e-01  5.230e-02   4.496 6.98e-06 ***
+    ## zipcode98092   4.631e-02  2.046e-02   2.263 0.023629 *  
+    ## zipcode98102   8.409e-01  4.345e-02  19.353  < 2e-16 ***
+    ## zipcode98103   6.445e-01  4.064e-02  15.858  < 2e-16 ***
+    ## zipcode98105   7.752e-01  4.187e-02  18.515  < 2e-16 ***
+    ## zipcode98106   2.647e-01  3.009e-02   8.795  < 2e-16 ***
+    ## zipcode98107   6.631e-01  4.194e-02  15.812  < 2e-16 ***
+    ## zipcode98108   2.582e-01  3.386e-02   7.627 2.61e-14 ***
+    ## zipcode98109   8.511e-01  4.382e-02  19.421  < 2e-16 ***
+    ## zipcode98112   9.234e-01  3.822e-02  24.162  < 2e-16 ***
+    ## zipcode98115   6.372e-01  4.116e-02  15.479  < 2e-16 ***
+    ## zipcode98116   6.187e-01  3.357e-02  18.429  < 2e-16 ***
+    ## zipcode98117   6.253e-01  4.174e-02  14.979  < 2e-16 ***
+    ## zipcode98118   3.768e-01  2.933e-02  12.847  < 2e-16 ***
+    ## zipcode98119   8.146e-01  4.115e-02  19.794  < 2e-16 ***
+    ## zipcode98122   6.872e-01  3.675e-02  18.700  < 2e-16 ***
+    ## zipcode98125   3.442e-01  4.454e-02   7.728 1.18e-14 ***
+    ## zipcode98126   4.311e-01  3.067e-02  14.054  < 2e-16 ***
+    ## zipcode98133   2.159e-01  4.587e-02   4.707 2.55e-06 ***
+    ## zipcode98136   5.597e-01  3.154e-02  17.744  < 2e-16 ***
+    ## zipcode98144   5.767e-01  3.398e-02  16.971  < 2e-16 ***
+    ## zipcode98146   1.676e-01  2.825e-02   5.931 3.10e-09 ***
+    ## zipcode98148   8.793e-02  3.611e-02   2.435 0.014897 *  
+    ## zipcode98155   1.613e-01  4.770e-02   3.381 0.000725 ***
+    ## zipcode98166   2.007e-01  2.580e-02   7.778 8.03e-15 ***
+    ## zipcode98168   5.361e-03  2.722e-02   0.197 0.843898    
+    ## zipcode98177   3.265e-01  4.763e-02   6.854 7.54e-12 ***
+    ## zipcode98178   5.951e-02  2.779e-02   2.141 0.032300 *  
+    ## zipcode98188   4.913e-02  2.987e-02   1.645 0.099989 .  
+    ## zipcode98198   2.725e-02  2.172e-02   1.255 0.209566    
+    ## zipcode98199   6.513e-01  3.976e-02  16.383  < 2e-16 ***
+    ## lat            5.790e-01  9.968e-02   5.808 6.49e-09 ***
+    ## long          -3.267e-01  7.624e-02  -4.285 1.84e-05 ***
+    ## sqft_living15  8.808e-05  4.461e-06  19.746  < 2e-16 ***
+    ## sqft_lot15     1.878e-07  8.078e-08   2.325 0.020065 *  
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## Residual standard error: 184100 on 11186 degrees of freedom
-    ## Multiple R-squared:  0.7551, Adjusted R-squared:  0.7533 
-    ## F-statistic: 415.5 on 83 and 11186 DF,  p-value: < 2.2e-16
+    ## Residual standard error: 0.1823 on 11157 degrees of freedom
+    ## Multiple R-squared:  0.8809, Adjusted R-squared:   0.88 
+    ## F-statistic: 982.7 on 84 and 11157 DF,  p-value: < 2.2e-16
 
 ``` r
 vif(cv.loghp.trans.lm2.step)
 ```
 
     ##                      GVIF Df GVIF^(1/(2*Df))
-    ## bedrooms         1.964262  1        1.401521
-    ## bathrooms        3.494753  1        1.869426
-    ## sqft_living      8.043286  1        2.836069
-    ## sqft_lot         2.454469  1        1.566674
-    ## waterfront       1.140462  1        1.067924
-    ## view             1.378361  1        1.174036
-    ## condition        1.330867  1        1.153632
-    ## grade            3.582533  1        1.892758
-    ## sqft_above       5.363232  1        2.315865
-    ## yr_built         3.345735  1        1.829135
-    ## renovated        1.174502  1        1.083744
-    ## zipcode       8488.368694 69        1.067750
-    ## lat             65.189327  1        8.073991
-    ## long            36.835550  1        6.069230
-    ## sqft_living15    3.204277  1        1.790050
+    ## bedrooms         1.950916  1        1.396752
+    ## bathrooms        3.454231  1        1.858556
+    ## sqft_living      7.858142  1        2.803238
+    ## sqft_lot         3.103156  1        1.761578
+    ## waterfront       1.139545  1        1.067495
+    ## view             1.369716  1        1.170349
+    ## condition        1.337301  1        1.156417
+    ## grade            3.561005  1        1.887063
+    ## sqft_above       5.251695  1        2.291658
+    ## yr_built         3.352220  1        1.830907
+    ## renovated        1.182402  1        1.087383
+    ## zipcode       9931.792454 69        1.068966
+    ## lat             64.161960  1        8.010116
+    ## long            38.234819  1        6.183431
+    ## sqft_living15    3.151867  1        1.775350
+    ## sqft_lot15       1.661935  1        1.289161
 
 VIF, as discussed above, remained pretty much the same for the same
 variables after taking out the renovated dummy variable.
@@ -2100,15 +1841,15 @@ results = PredAcc(y,ypred)
 
     ## RMSEP
     ## ================
-    ## Inf 
+    ## 657179.8 
     ## 
     ## MAE
     ## ================
-    ## Inf 
+    ## 546479.7 
     ## 
     ## MAPE
     ## ================
-    ## NaN
+    ## 99.99687
 
 \#\#\#Cross validate using k-fold \#\#\#
 
@@ -2116,8 +1857,8 @@ results = PredAcc(y,ypred)
 kfold.MLR.log(loghp.trans.lm2.step, k=10)
 ```
 
-    ##   RMSEP MAE MAPE
-    ## 1   Inf Inf  NaN
+    ##      RMSEP    MAE      MAPE
+    ## 1 656688.5 542789 0.9999686
 
 \#\#\#Cross validate using .632 bootstrat approach \#\#\#
 
@@ -2127,18 +1868,18 @@ bootlog.cv(loghp.trans.lm2.step, B=100)
 
     ## RMSEP
     ## ===============
-    ## NaN 
+    ## 135485.1 
     ## 
     ## MAE
     ## ===============
-    ## NaN 
+    ## 74894.17 
     ## 
     ## MAPE
     ## ===============
-    ## NaN
+    ## 13.70818
 
-    ##   RMSEP MAE MAPE
-    ## 1   NaN NaN  NaN
+    ##      RMSEP      MAE     MAPE
+    ## 1 135485.1 74894.17 13.70818
 
 The best predictions had the .632 bootstrap of the transformed model
 (logged response with predictors transformed the way it was described
@@ -2159,24 +1900,23 @@ anova(loghp.trans.lm2.step)
     ## Analysis of Variance Table
     ## 
     ## Response: price
-    ##                  Df     Sum Sq    Mean Sq   F value    Pr(>F)    
-    ## bedrooms          1 2.1710e+14 2.1710e+14 6361.3128 < 2.2e-16 ***
-    ## bathrooms         1 3.4046e+14 3.4046e+14 9975.8149 < 2.2e-16 ***
-    ## sqft_living       1 3.0239e+14 3.0239e+14 8860.3721 < 2.2e-16 ***
-    ## sqft_lot          1 2.3574e+12 2.3574e+12   69.0735 < 2.2e-16 ***
-    ## floors            1 2.7748e+11 2.7748e+11    8.1305  0.004358 ** 
-    ## waterfront        1 8.5685e+13 8.5685e+13 2510.6260 < 2.2e-16 ***
-    ## view              1 7.0966e+13 7.0966e+13 2079.3635 < 2.2e-16 ***
-    ## condition         1 1.2111e+13 1.2111e+13  354.8660 < 2.2e-16 ***
-    ## grade             1 1.1281e+14 1.1281e+14 3305.3384 < 2.2e-16 ***
-    ## sqft_above        1 3.2584e+11 3.2584e+11    9.5475  0.002006 ** 
-    ## yr_built          1 1.1738e+14 1.1738e+14 3439.4062 < 2.2e-16 ***
-    ## renovated         1 8.3736e+10 8.3736e+10    2.4535  0.117282    
-    ## zipcode          69 3.8647e+14 5.6010e+12  164.1147 < 2.2e-16 ***
-    ## lat               1 2.8445e+11 2.8445e+11    8.3345  0.003895 ** 
-    ## long              1 2.2812e+11 2.2812e+11    6.6840  0.009737 ** 
-    ## sqft_living15     1 1.2984e+13 1.2984e+13  380.4416 < 2.2e-16 ***
-    ## Residuals     16102 5.4954e+14 3.4129e+10                        
+    ##                  Df  Sum Sq Mean Sq    F value    Pr(>F)    
+    ## bedrooms          1  566.76  566.76 16987.9885 < 2.2e-16 ***
+    ## bathrooms         1  793.44  793.44 23782.2268 < 2.2e-16 ***
+    ## sqft_living       1  765.43  765.43 22942.8460 < 2.2e-16 ***
+    ## sqft_lot          1   36.70   36.70  1099.8979 < 2.2e-16 ***
+    ## waterfront        1   59.84   59.84  1793.5815 < 2.2e-16 ***
+    ## view              1  103.95  103.95  3115.7664 < 2.2e-16 ***
+    ## condition         1   31.96   31.96   957.9526 < 2.2e-16 ***
+    ## grade             1  290.86  290.86  8718.0875 < 2.2e-16 ***
+    ## sqft_above        1    5.65    5.65   169.4247 < 2.2e-16 ***
+    ## renovated         1   27.64   27.64   828.3564 < 2.2e-16 ***
+    ## zipcode          69 1275.89   18.49   554.2500 < 2.2e-16 ***
+    ## lat               1    1.64    1.64    49.1346 2.485e-12 ***
+    ## long              1    1.25    1.25    37.5418 9.156e-10 ***
+    ## sqft_living15     1   19.73   19.73   591.4616 < 2.2e-16 ***
+    ## sqft_lot15        1    0.13    0.13     4.0315   0.04468 *  
+    ## Residuals     16103  537.24    0.03                         
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -2185,9 +1925,10 @@ anova(loghp.trans.lm2.step)
 loghp.trans.lm2.step$anova
 ```
 
-    ##           Step Df    Deviance Resid. Df   Resid. Dev      AIC
-    ## 1              NA          NA     16101 5.494956e+14 392675.3
-    ## 2 - sqft_lot15  1 47370775390     16102 5.495430e+14 392674.7
+    ##         Step Df    Deviance Resid. Df Resid. Dev       AIC
+    ## 1            NA          NA     16101   537.2240 -54953.62
+    ## 2   - floors  1 0.004404823     16102   537.2284 -54955.48
+    ## 3 - yr_built  1 0.009013392     16103   537.2374 -54957.21
 
 The model with transformations and predictors that were removed in the
 stepwise selection (and sqft\_basement and renovated removed because of
