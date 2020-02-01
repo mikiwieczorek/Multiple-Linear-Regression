@@ -491,14 +491,14 @@ trans.lm1 = lm(price~., data = King_Trans)
 par(mfrow=c(2,2))
 plot(trans.lm1)
 ```
-This is not that much better at all. Let's fit a model with the price (response) transformed as well.
+<br>This is not that much better at all. Let's fit a model with the price (response) transformed as well.
 
 
-```{r echo=TRUE}
+```{r}
 King_Trans$price =  log(King_Trans$price)
 #Statplot(King_Trans$price)
 ```
-The reposnse is a go. It looks way better.
+<br>The reposnse is a go. It looks way better.
 
 ```{r}
 loghp.trans.lm1 = lm(price~., data = King_Trans)
@@ -506,13 +506,13 @@ par(mfrow=c(2,2))
 plot(loghp.trans.lm1)
 
 ```
-The residual vs. Fitted plot looks way better. Now, we have constant variance!
+<br>The residual vs. Fitted plot looks way better. Now, we have constant variance!
 
 Let's address some multicolinearity by checking the variance inflation factor, vif(). Anything VIF > 10 would be a concern of multicollinearity.
 ```{r}
 VIF(loghp.trans.lm1)
 ```
-renovated & yr_renovated look like there might be some multicollinearity. Let's test a model without one:
+<br>renovated & yr_renovated look like there might be some multicollinearity. Let's test a model without one:
 
 renovated is a dummy variable telling us whether a house has been renovated at all or not; yr_renovated tells us the year a house has been last renovated (0 means that it has not been). Yr_renovated has an odd notation so I am choosing to keep renovated (dummy variable)
 ```{r}
@@ -524,7 +524,7 @@ par(mfrow=c(2,2))
 vif(loghp.trans.lm2)
 
 ```
-Now, the model looks way better.
+<br>Now, the model looks way better.
 
 latitude and longitude --> but it makes practical sense to leave them be in the model since latitude or longitude by themsleves would not give as all the informaiton needed (when they are both present in the model).
 
@@ -533,7 +533,7 @@ zipcode: we have 70 different zipcodes.
 str(King_Trans$zipcode)
 table(King_Trans$zipcode)
 ```
-It makes sense for some zipcodes to be correlated with others. Even though each full zip code represents its own area, the zip code prefix represents a region in a given state (the are many zip codes with similar prefixes: 980, 981)
+<br>It makes sense for some zipcodes to be correlated with others. Even though each full zip code represents its own area, the zip code prefix represents a region in a given state (the are many zip codes with similar prefixes: 980, 981)
 
 Should we include? Since we already have a latitude and longitude? Let's see how the stepwise selection sees it.
 
