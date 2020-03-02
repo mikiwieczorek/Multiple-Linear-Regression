@@ -18,7 +18,7 @@ Data
 The data for these sales comes from the official public records of home
 sales in the King County area, Washington State. The data set contains
 21,606 homes that sold between May 2014 and May 2015. Load the train and
-test data sets. The description of all variables is in the data section.
+test data sets. The description of all variables is in the [data section](https://github.com/mikiwieczorek/Multiple-Linear-Regression/tree/master/Data).
 
 ``` r
 setwd("~/OneDrive - MNSCU/myGithub/Statistics/Regression_models/Multiple_Linear_Regression/Multiple-Linear-Regression/Data")
